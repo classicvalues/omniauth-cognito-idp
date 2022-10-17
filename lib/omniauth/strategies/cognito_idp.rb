@@ -32,6 +32,7 @@ module OmniAuth
       option :jwt_leeway, 60
       option :user_pool_id, nil
       option :aws_region, nil
+      option :redirect_uri, nil
 
       uid do
         parsed_id_token['sub'] if parsed_id_token
@@ -58,6 +59,10 @@ module OmniAuth
 
       extra do
         { raw_info: parsed_id_token.reject { |key| %w[iss aud exp iat token_use nbf].include?(key) } }
+      end
+
+      def callback_url
+        options[:redirect_uri] || super
       end
 
       private

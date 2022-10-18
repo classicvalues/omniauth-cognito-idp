@@ -65,6 +65,16 @@ module OmniAuth
         options[:redirect_uri] || super
       end
 
+      def authorize_params
+        params = super
+
+        if request.params.key?('identity_provider')
+          params['identity_provider'] = request.params['identity_provider']
+        end
+
+        params
+      end
+
       private
 
       # Override this method to remove the query string from the callback_url because Cognito

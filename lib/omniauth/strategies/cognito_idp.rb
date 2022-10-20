@@ -68,8 +68,10 @@ module OmniAuth
       def authorize_params
         params = super
 
-        if request.params.key?('identity_provider')
-          params['identity_provider'] = request.params['identity_provider']
+        %w[identity_provider idp_identifier].each do |key|
+          if request.params.key?(key)
+            params[key] = request.params[key]
+          end
         end
 
         params

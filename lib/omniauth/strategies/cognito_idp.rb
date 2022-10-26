@@ -42,6 +42,8 @@ module OmniAuth
         if parsed_id_token
           {
             name: parsed_id_token['name'],
+            first_name: parsed_id_token['given_name'],
+            last_name: parsed_id_token['family_name'],
             email: parsed_id_token['email'],
             phone: parsed_id_token['phone_number']
           }
